@@ -1,0 +1,11 @@
+.tracker_table{
+    min-width: 700
+}
+TableCell.head {
+        background-color: black;
+        color: white;
+}
+
+TableCell.body {
+        font-size: 14
+}

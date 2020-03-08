@@ -1,0 +1,13 @@
+.tracker_table{
+    min-width: 700
+}
+
+.table_head{
+        background-color: black;
+        color: white;
+}
+
+tbody {
+        font-size: 14
+}
+

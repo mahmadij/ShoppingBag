@@ -1,0 +1,8 @@
+To install all the node modules run on cmd:
+npm install
+On one cmd run the following:
+npm run build (or yarn build)
+One a different one run the ser:
+npm run serve (or yarn serve)
+You need to setup a firebase project. Follow the process on their website to create one.
+This is not a project that would make sense ou there. It is just for practice.
