@@ -29,9 +29,12 @@ constructor(props){
       amount:0,
       measure:'',
       id:0,
-      error_text:'Field cannot be empty'
-    };
-    
+      error_text:'Field cannot be empty',
+      subject:'ShoppingBag List',
+      email:'',
+      body:''
+  };
+    this.sendEmail = this.sendEmail.bind(this)    
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -39,7 +42,8 @@ constructor(props){
     this.handleSaveChanges = this.handleSaveChanges.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.clearState = this.clearState.bind(this)
+    this.clearState = this.clearState.bind(this);
+    this.buildBody = this.buildBody.bind(this);
 }
 
 handleAdd(){
@@ -130,6 +134,53 @@ handleSubmit(event) {
     }
     )
   }
+
+  
+
+  sendEmail(){
+    this.buildBody();
+    window.open('mailto:'+this.props.email+'?subject='+this.state.subject+'&body='+this.state.body);
+  }
+buildBody(){
+  return(
+    <div>
+    <table>
+    <tr>
+      <td>Name</td>
+      <td>Amount</td>
+      <td>Measure</td>
+    </tr>
+    {this.props.items.map(row => (
+              <tr key={row.id}>
+                <td>{row.name}</td>
+                <td>{row.amount}</td>
+                <td > {row.measure} </td>
+              </tr>
+            ))}
+    </table>
+    </div>
+    // <TableContainer component={Paper}>
+    //   <Table aria-label="spanning table">
+    //     <TableHead>
+    //       <TableRow>
+    //         <TableCell>Name.</TableCell>
+    //         <TableCell>Amount</TableCell>
+    //         <TableCell>Measure</TableCell>
+    //       </TableRow>
+    //     </TableHead>
+    //     <TableBody>
+    //       {this.props.items.map(row => (
+    //         <TableRow key={row.id}>
+    //           <TableCell>{row.name}</TableCell>
+    //           <TableCell>{row.amount}</TableCell>
+    //           <TableCell > {row.measure} </TableCell>
+    //         </TableRow>
+    //       ))}
+    //     </TableBody>
+    //   </Table>
+    // </TableContainer> 
+  )
+}
 
 render(){
         return (
@@ -260,6 +311,7 @@ render(){
           </Button>
         </DialogActions>
       </Dialog>
+      <Button onClick={this.sendEmail}>Send Email</Button>
     </div>
             </div>
         );
@@ -269,7 +321,8 @@ render(){
 export default connect((state)=>{
     return{
       items:state.items,
-      measures:state.measures
+      measures:state.measures,
+      email:state.user.email
     }
 }
 
